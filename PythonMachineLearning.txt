@@ -1,0 +1,48 @@
+- Terms
+  - Feature
+    - Input
+  - Label (target)
+    - Output
+  - Epoch
+    - A pass over the training dataset
+  - Standardization
+    - Normalize the features by making them to have the mean of 0 and the standard deviation of 1
+  - Hyperplane
+    - Decision boundary
+  - Regularization
+    - A method for handling over-fitting.  It works by adding penalty for big weights.
+  - Feature selection
+    - Select features that are important and get rid of ones that are not to reduce the 
+
+    
+- Chapter 1
+  - Types of learning
+    - Supervised
+    - Unsupervised
+    - Reinforcement
+- Chapter 2
+  - Perceptron
+    - A linear model for binary classification 
+    - It uses correct/not correct to adjust weight
+  - Adaline gradient descent
+    - A linear model for binary classification 
+    - It uses gradient to adjust weight
+    - The weight is adjusted all at once per epoch
+  - Stochastic gradient descent
+    - Same as Adaline gradient descent, but it adjust the weight incrementally
+- Chapter 3
+  - Logistic regression
+    - A linear model for binary classification 
+  - Support vector machine
+    - A linear model for binary classification 
+    - Same as Perceptron, but it tries to maximize the margin (distance between the decision boundary and the training examples)
+  - Decision tree
+- Chapter 4
+  - Feature types
+    - Numerical
+      - Numerical feature
+    - Ordinal
+      - Categorical feature that can be ordered (ex: T-shirt size)
+    - Nominal
+      - Categorical feature that can not be ordered (ex: T-shirt color)
+

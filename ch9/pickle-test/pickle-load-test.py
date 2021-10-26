@@ -5,7 +5,7 @@ from vectorizer import vect
 import numpy as np
 
 # Load the pickled classifier
-clf = pickle.load(open('pickled_data/classifier.pkl', 'rb')) # rb: read in binary mode
+clf = pickle.load(open('pickled_data/classifier2.pkl', 'rb')) # rb: read in binary mode
 
 # Vectorize an example sentence
 example = ['I love this movie']

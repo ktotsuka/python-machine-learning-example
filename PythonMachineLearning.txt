@@ -12,9 +12,99 @@
   - Regularization
     - A method for handling over-fitting.  It works by adding penalty for big weights.
   - Feature selection
-    - Select features that are important and get rid of ones that are not to reduce the 
+    - Select features that are important and get rid of ones that are not to reduce the complexity
+  - Dataset
+    - Training dataset
+      - The sample of data used to fit the model
+    - Validation dataset
+      - The sample of data used to provide an unbiased evaluation of a model fit on the training dataset while tuning model hyperparameters.  The model obtained from the validation dataset is still biased because the hyperparameters are chosen based on the dataset.
+      - When using k-fold cross validation, the training dataset is automatically split into the training and the validation dataset, so you don't have to explicitly creat the validation dataset.
+    - Test dataset
+      - The sample of data used to provide an unbiased evaluation of a final model fit.  For the final model training, both training and validation dataset and be used.
 
+- Notes
+  - Code download
+    - git clone https://github.com/rasbt/python-machine-learning-book-3rd-edition.git
+  - Changes
+    - Linux PC
+      - Downgraded numpy to avoid error (Cannot convert a symbolic Tensor (...) to a numpy array)
+        - pip3 install numpy==1.19.5
     
+- Textbook notes
+  - Figure for NN: p388
+  - Figure of sigmoidal logistic function: p63  
+    
+- Tensorflow GPU setup (Ubuntu 20.04)
+  - Reference
+    - https://towardsdatascience.com/installing-tensorflow-gpu-in-ubuntu-20-04-4ee3ca4cb75d
+  - Graphics card on Ubuntu laptop
+    - NVIDIA GP104GLM [Quadro P3200 Mobile] (rev a1)
+      - It is listed as CUDA enabled at developer.nvidia.com/cuda-gpus#compute
+  - Note that all versions has to be compatible (Tensorflow, Python, CuDNN, CUDA, NVIDIA driver version)
+    - My setup
+      - Tensorflow (2.2.0), Python (3.8.10), CuDNN (7.6.5), CUDA (10.1), NVIDIA driver (470.82.00)
+    - https://www.tensorflow.org/install/source#gpu
+      - For Tensorflow, Python, CuDNN, CUDA
+    - https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html
+      - For CUDA and NVIDIA driver version
+      - ex: CUDA 10.1 -> NVIDIA driver version has to be >= 418.39
+      - Check NVIDIA driver version
+        - $ modinfo $(modprobe --resolve-alias nvidia)
+  - Install CUDA 10.1
+    - $sudo apt install nvidia-cuda-toolkit
+    - Verify CUDA 10.1 is installed
+      - $ nvcc -V
+        - It should say "Cuda compilation tools, release 10.1, V10.1.243"
+      - $ whereis cuda
+        - It should say "cuda: /usr/lib/cuda /usr/include/cuda.h"
+  - Install cuDNN
+    - Download cuDNN
+       - Go to "https://developer.nvidia.com/rdp/form/cudnn-download-survey"
+         - You have to sign up for NVIDIA Developer Program to access this webpage
+       - Choose "Download cuDNN v7.6.5 (November 5th, 2019) for CUDA 10.1", then "cuDNN Library for Linux"
+    - Extract and copy the files
+      - $ tar -xvzf cudnn-10.1-linux-x64-v7.6.5.32.tgz
+      - $ sudo cp cuda/include/cudnn.h /usr/lib/cuda/include/
+      - $ sudo cp cuda/lib64/libcudnn* /usr/lib/cuda/lib64/
+    - Set the file permissions of cuDNN
+      - $ sudo chmod a+r /usr/lib/cuda/include/cudnn.h /usr/lib/cuda/lib64/libcudnn*
+    - Export CUDA environment variables
+      - $ echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+      - $ echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH' >> ~/.bashrc
+  - Install Tensorflow
+    - $ pip3 install tensorflow==2.2.0
+  - Verify that Tensorflow can use GPU
+    - > import tensorflow as tf
+    - > print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+    - > print("GPU Available:", tf.test.is_gpu_available())
+    - > print("Device name:", tf.test.gpu_device_name())
+  - Disable GPU (and use CPU)
+    - Note that Tensorflow will automatically use GPU when available.  If you want to use CPU instead of GPU, you have to explicitly disable GPU
+      - import os
+      - os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+    - Based on my testing with 78,000 trainable parameters, using CPU takes about 15% longer.  Based on people on-line, the GPU will be more effective for larger neural networks.  According to one website (https://datamadness.github.io/TensorFlow2-CPU-vs-GPU), using GPU was 6 times faster than CPU for NN with 60,000,000 trainable parameters
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 - Chapter 1
   - Types of learning
     - Supervised
@@ -46,3 +136,4 @@
     - Nominal
       - Categorical feature that can not be ordered (ex: T-shirt color)
 
+- 
